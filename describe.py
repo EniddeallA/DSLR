@@ -30,7 +30,7 @@ class dslr:
                 else:
                     interp = (sorted_vals[upper_index] - sorted_vals[lower_index]) * (index - lower_index)
                     return sorted_vals[lower_index] + interp
-            
+
             q25 = quantile(sorted_values, 0.25)
             q50 = quantile(sorted_values, 0.5)
             q75 = quantile(sorted_values, 0.75)
@@ -39,19 +39,21 @@ class dslr:
             variance = std ** 2
         
             results[column_name] = {
-                "Count": f"{count:.6f}",
-                "Mean": f"{mean:.6f}",
-                "Std": f"{std:.6f}",
-                "Min": f"{min_val:.6f}",
-                "25%": f"{q25:.6f}",
-                "50%": f"{q50:.6f}",
-                "75%": f"{q75:.6f}",
-                "Max": f"{max_val:.6f}",
-                "Variance": f"{variance:.6f}",
-                "Range": f"{range_val:.6f}",
+                "Count": count,
+                "Mean": mean,
+                "Std": std,
+                "Min": min_val,
+                "25%": q25,
+                "50%": q50,
+                "75%": q75,
+                "Max": max_val,
+                "Variance": variance,
+                "Range": range_val,
             }
 
         return pd.DataFrame(results)
 
-df = dslr("datasets/dataset_train.csv")
-print(df.describe())
+if __name__ == "__main__":
+    test = dslr("datasets/dataset_train.csv")
+    print(test.describe())
+    print(test.df.describe())
